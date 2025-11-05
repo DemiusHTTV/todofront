@@ -45,26 +45,35 @@ export default {
         await this.fetchTasks()
     },
     methods: {
-        async fetchTasks() {
-            try {
-                   console.log('Telegram object:', window.Telegram)
-    console.log('WebApp object:', window.Telegram?.WebApp)
-    console.log('User data:', window.Telegram?.WebApp?.initDataUnsafe?.user)
-                const tg_user = window.Telegram.WebApp.initDataUnsafe?.user
-   
+       async fetchTasks() {
+  try {
+    // Способ 1 - через initData
+    const initData = window.Telegram.WebApp.initData
+    console.log('InitData string:', initData)
+    
+    // Способ 2 - через initDataUnsafe все данные
+    const allData = window.Telegram.WebApp.initDataUnsafe
+    console.log('All initData:', allData)
+    
+    // Способ 3 - если все равно нет, используй query_id для запроса к бэкенду
+    const queryId = window.Telegram.WebApp.initDataUnsafe?.query_id
+    if (queryId) {
+      // Отправь query_id на бэкенд, чтобы получить данные пользователя
+      const response = await fetch(`https://твой-бэкенд/api/get-user?query_id=${queryId}`)
+      const userData = await response.json()
+      console.log('User from backend:', userData)
+    }
+    
+    // Если все способы не работают - покажи инструкцию
+    if (!window.Telegram.WebApp.initData) {
+      this.errorMessage = 'Откройте приложение через меню бота (кнопка "Open Web App")'
+      return
+    }
 
-if (!tg_user) {
-    this.errorMessage = 'Для работы приложения необходимо открыть его через Telegram бота. Пожалуйста, используйте меню бота.'
-  return
-}
-                const response = await fetch(`https://studious-halibut-6xxg5r5rwg43rj4r.github.dev/api/tasks/${tg_user.id}`)
-                const data = await response.json()
-                 console.log('Response status:', response.status)
-                this.tasks = data
-            } catch (error) {
-                console.log('error', error)
-            }
-        },
+  } catch (error) {
+    console.log('error', error)
+  }
+},
         async createTask() {
             if (!this.newTask) return
 
