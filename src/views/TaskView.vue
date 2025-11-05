@@ -10,7 +10,9 @@
             />
             <button @click="createTask" class="add-button">+</button>
         </div>
-
+<div v-if="errorMessage" class="error-message">
+            {{ errorMessage }}
+        </div>
         <div class="tasks-list">
             <div
                 v-for="task in tasks"
@@ -35,7 +37,8 @@ export default {
     data() {
         return {
             tasks: [],
-            newTask: ''
+            newTask: '',
+            errorMessage:''
         }
     },
     async mounted() {
@@ -51,9 +54,7 @@ export default {
    
 
 if (!tg_user) {
-  console.error('User data not available in Telegram Web App')
-  // Можно показать сообщение пользователю
-  alert('Для работы приложения необходимо открыть его через Telegram бота')
+    this.errorMessage = 'Для работы приложения необходимо открыть его через Telegram бота. Пожалуйста, используйте меню бота.'
   return
 }
                 const response = await fetch(`https://studious-halibut-6xxg5r5rwg43rj4r.github.dev/api/tasks/${tg_user.id}`)
