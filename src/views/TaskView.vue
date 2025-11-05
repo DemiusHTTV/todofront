@@ -48,6 +48,14 @@ export default {
     console.log('WebApp object:', window.Telegram?.WebApp)
     console.log('User data:', window.Telegram?.WebApp?.initDataUnsafe?.user)
                 const tg_user = window.Telegram.WebApp.initDataUnsafe?.user
+   
+
+if (!tg_user) {
+  console.error('User data not available in Telegram Web App')
+  // Можно показать сообщение пользователю
+  alert('Для работы приложения необходимо открыть его через Telegram бота')
+  return
+}
                 const response = await fetch(`https://studious-halibut-6xxg5r5rwg43rj4r.github.dev/api/tasks/${tg_user.id}`)
                 const data = await response.json()
                  console.log('Response status:', response.status)
