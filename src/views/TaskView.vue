@@ -45,7 +45,7 @@ export default {
         async fetchTasks() {
             try {
                 const tg_user = window.Telegram.WebApp.initDataUnsafe?.user
-                const response = await fetch(`https://studious-halibut-6xxg5r5rwg43rj4r-8000.app.github.dev/api/tasks/${tg_user.id}`)
+                const response = await fetch(`https://studious-halibut-6xxg5r5rwg43rj4r.github.dev/api/tasks/${tg_user.id}`)
                 const data = await response.json()
                 this.tasks = data
             } catch (error) {
@@ -57,7 +57,7 @@ export default {
 
             try {
                 const tg_user = window.Telegram.WebApp.initDataUnsafe?.user
-                const response = await fetch(`https://studious-halibut-6xxg5r5rwg43rj4r-8000.app.github.dev/api/add`, {
+                const response = await fetch(`https://studious-halibut-6xxg5r5rwg43rj4r.github.dev/api/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ export default {
         },
         async completeTask(taskId) {
             try {
-                const response = await fetch(`https://studious-halibut-6xxg5r5rwg43rj4r-8000.app.github.dev/api/completed`, {
+                const response = await fetch(`https://studious-halibut-6xxg5r5rwg43rj4r.github.dev/api/completed`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
