@@ -4,7 +4,7 @@
             <input 
                 v-model="newTask"
                 type="text"
-                placeholder="Введите задачу..."
+                placeholder="Введите задачeeу..."
                 class="task-input"
                 @keyup.enter="createTask"
             />
@@ -50,8 +50,7 @@ export default {
     // Способ 1 - через initData
     const initData = window.Telegram.WebApp.initData
     console.log('InitData string:', initData)
-    
-    // Способ 2 - через initDataUnsafe все данные
+  
     const allData = window.Telegram.WebApp.initDataUnsafe
     console.log('All initData:', allData)
     
