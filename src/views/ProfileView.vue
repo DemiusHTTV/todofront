@@ -61,7 +61,7 @@ export default {
                     return
                 }
                 
-                const response = await fetch(`https://studious-halibut-6xxg5r5rwg43rj4r.github.dev/api/main/${tg_user.id}`)
+                const response = await fetch(`https://studious-halibut-6xxg5r5rwg43rj4r-8000.app.github.dev/api/main/${tg_user.id}`)
                 this.debugStatus = `Статус: ${response.status}`
                 
                 const data = await response.json()
