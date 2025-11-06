@@ -4,6 +4,7 @@
     <router-view />
 
     <Navbar />
+    <p>{{ m }}</p>
 
   </div>
 </template>
@@ -15,6 +16,12 @@ export default {
   name: 'App',
   components: {
     Navbar
+  },
+  data(){
+    return{
+       
+    m : 'User:'+window.Telegram?.WebApp?.initDataUnsafe?.user
+    }
   }
 }
 </script>
